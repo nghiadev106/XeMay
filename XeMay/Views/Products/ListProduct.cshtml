@@ -1,0 +1,177 @@
+﻿@model XeMay.Models.PaginationSet<XeMay.Data.Product>
+@{
+    ViewData["Title"] = "Danh mục sản phẩm";
+    var ListCate = (List<XeMay.Data.Category>)ViewBag.ListCate;
+}
+
+<!--main area-->
+<main id="main" class="main-site left-sidebar">
+
+    <div class="container">
+
+        <div class="wrap-breadcrumb">
+            <ul>
+                <li class="item-link"><a href="/" class="link">Trang chủ</a></li>
+                <li class="item-link"><span>Shop</span></li>
+            </ul>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
+
+                <div class="banner-shop">
+                    <a href="#" class="banner-link">
+                        <figure><img src="/assets/images/shop-banner.jpg" alt=""></figure>
+                    </a>
+                </div>     
+                <div class="row">
+
+                    <ul class="product-list grid-products equal-container">
+                        @if (Model.Items.Count() > 0)
+                        {
+                            foreach (var item in Model.Items)
+                            {
+                                <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                                    <div class="product product-style-3 equal-elem ">
+                                        <div class="product-thumnail">
+                                            <a href="/san-pham/@item.Url/@item.Id" title="@item.Name">
+                                                <figure><img src="@item.Logo" alt="@item.Name"></figure>
+                                            </a>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="/san-pham/@item.Url/@item.Id" class="product-name"><span>@item.Name</span></a>
+                                            @if (item.PriceDiscount > 0)
+                                            {
+                                                <div class="wrap-price"><ins><p class="product-price">@item.PriceDiscount</p></ins> <del><p class="product-price">@item.Price</p></del></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap-price"><ins><p class="product-price">@item.Price</p></ins></div>
+
+                                            }
+                                            <button data-id="@item.Id" class="btn add-to-cart btn-add-cart-2">Thêm giỏ hàng</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                            </ul>
+
+                </div>
+
+                <div class="wrap-pagination-info">
+                    <div class="page-numbers">
+                        @if (Model.TotalPages > 1)
+                        {
+                            // Create numeric links
+                            var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
+                            var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+
+                            <nav>
+                                <ul class="pagination">
+                                    @if (Model.Page > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="?sort=@Model.Sort&pageSize=@Model.PageSize&page=1" aria-label="First">
+                                                <i class="fa fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?sort=@Model.Sort&pageSize=@Model.PageSize&page=@(Model.Page-1)" aria-label="Previous">
+                                                <i class="fa fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                    {
+                                        if (Model.Page == i)
+                                        {
+                                            <li class="active page-item"><a class="page-link" href="?sort=@Model.Sort&pageSize=@Model.PageSize&page=@i" title="Trang @i">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item"><a class="page-link" href="?sort=@Model.Sort&pageSize=@Model.PageSize&page=@i" title="Trang @i">@i</a></li>
+                                        }
+                                    }
+                                    @if (Model.Page < Model.TotalPages)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="?sort=@Model.Sort&pageSize=@Model.PageSize&page=@(Model.Page+1)" aria-label="Next">
+                                                <i class="fa fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?sort=@Model.Sort&pageSize=@Model.PageSize&page=@Model.TotalPages" aria-label="Last">
+                                                <i class="fa fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        }
+                    </div>
+                </div>
+            </div><!--end main products area-->
+
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
+                <div class="widget mercado-widget categories-widget">
+                    <h2 class="widget-title">Thương hiệu</h2>
+                    <div class="widget-content">
+                        <ul class="list-category">
+                            @if (ListCate.Count() > 0)
+                            {
+                                foreach (var item in ListCate)
+                                {
+                                    <li class="category-item">
+                                        <a href="/thuong-hieu/@item.Url/@item.Id" class="cate-link">@item.Name</a>
+                                    </li>
+                                } }
+
+                                </ul>
+                    </div>
+                </div><!-- Categories widget-->
+          
+                <div class="widget mercado-widget widget-product">
+                    <h2 class="widget-title">Sản phẩm bán chạy</h2>
+                    <div class="widget-content">
+                        <ul class="products">
+
+                            @if (Model.Items.Count() > 0)
+                            {
+                                foreach (var item in Model.Items.Take(6).ToList())
+                                {
+                                    <li class="product-item">
+                                        <div class="product product-widget-style">
+                                            <div class="thumbnnail">
+                                                <a href="/san-pham/@item.Url/@item.Id" title="Radiant-360 R6 Wireless Omnidirectional Speaker [White]">
+                                                    <figure><img src="@item.Logo" alt="" /></figure>
+                                                </a>
+                                            </div>
+                                            <div class="product-info">
+                                                <a href="/san-pham/@item.Url/@item.Id" class="product-name"><span>@item.Name</span></a>
+                                                @if (item.PriceDiscount > 0)
+                                                {
+                                                    <div class="wrap-price"><span class="product-price">@item.PriceDiscount</span></div>
+
+                                                }
+                                                else
+                                                { <div class="wrap-price"><span class="product-price">@item.Price</span></div>
+
+                                            }
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div><!-- brand widget-->
+
+            </div><!--end sitebar-->
+
+        </div><!--end row-->
+
+    </div><!--end container-->
+
+</main>
+<!--main area-->

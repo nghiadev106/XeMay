@@ -1,0 +1,251 @@
+﻿@model XeMay.Models.MenuViewModel
+
+<div class="nav-container">
+    <nav class="navigation" id="sf-menu">
+        <ul class="sf-menu sf-js-enabled sf-arrow product-menu">
+            <li class="active sfish-menu">
+                <a href="/"  style="text-transform:uppercase">
+                    <span class="home-icon"></span>Trang chủ
+                </a>
+            </li>
+            <li class="megamenu">
+                <a href="#" style="text-transform:uppercase">
+                    Sản phẩm mới<i aria-hidden="true" class="fa fa-angle-down"></i>
+                </a>
+                <ul class="mmenuffect">
+                    <li class="product-container">
+                        <ul class="products-grid row">
+                            @if (Model.ListProductNew.Count() > 0)
+                            {
+                                foreach (var item in Model.ListProductNew)
+                                {
+                                    <li class="col-sm-4 col-md-4 col-lg-4">
+                                        <div class="single-item">
+                                            <div class="single-item-inner ">
+                                                <div class="single-item-img">
+                                                    <div title="product image">
+                                                        <img src="@item.Logo" class="image" alt="product image" />
+                                                        <div class="hover-box">
+                                                            <button title="Add to cart" data-toggle="tooltip" data-placement="top"
+                                                                    type="button" data-id="@item.Id" class="btn btn-button cart-button btn-add-cart">
+                                                                Thêm giỏ hàng
+                                                            </button>
+                                                            <a href="/san-pham/@item.Url/@item.Id" class="quickview"><i class="fa fa-eye"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    @if (item.PriceDiscount > 0 && item.Price > 0)
+                                                    {
+                                                        <div class="item-lable">
+                                                            <span class="lable-new">-@(Math.Floor(Convert.ToDecimal(item.Price / item.PriceDiscount - 1) * 100))%</span>
+                                                            <span class="lable-sale">sale</span>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <div class="item-content">
+                                                    <div class="product-name">
+                                                        <a href="/san-pham/@item.Url/@item.Id">
+                                                            @item.Name
+                                                        </a>
+                                                    </div>
+                                                    <div class="ratting-box">
+                                                        <div class="rating">
+                                                            <span class="star active"></span>
+                                                            <span class="star active"></span>
+                                                            <span class="star active"></span>
+                                                            <span class="star active"></span>
+                                                            <span class="star-half-o"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        @if (item.PriceDiscount > 0 && item.Price > 0)
+                                                        {
+                                                            <span class="old-price">@Convert.ToDecimal(item.Price).ToString("N0") đ</span>
+                                                            <span class="new-price">@Convert.ToDecimal(item.PriceDiscount).ToString("N0") đ</span>
+                                                        }
+                                                        else if (item.Price > 0)
+                                                        {
+                                                            <span class="new-price">@Convert.ToDecimal(item.Price).ToString("N0") đ</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="new-price">Liên hệ</span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                }
+
+                            }
+                        </ul>
+                    </li>
+                    <!-- mega menu / -->
+                    <!-- / sf menu -->
+                </ul>
+            </li>
+
+            <li class="megamenu">
+                <a href="#" style="text-transform:uppercase">Sản phẩm Hot<i aria-hidden="true" class="fa fa-angle-down"></i>
+                </a>
+                <ul class="mmenuffect">
+                    <li class="product-container">
+                        <ul class="products-grid row">
+                            @if (Model.ListProductHot.Count() > 0)
+                            {
+                                foreach (var item in Model.ListProductHot)
+                                {
+                                    <li class="col-sm-4 col-md-4 col-lg-4">
+                                        <div class="single-item">
+                                            <div class="single-item-inner ">
+                                                <div class="single-item-img">
+                                                    <div title="product image">
+                                                        <img src="@item.Logo" class="image" alt="product image" />
+                                                        <div class="hover-box">
+                                                            <button title="Add to cart" data-toggle="tooltip" data-placement="top"
+                                                                    type="button" data-id="@item.Id" class="btn btn-button cart-button btn-add-cart">
+                                                                Thêm giỏ hàng
+                                                            </button>
+                                                            <a href="/san-pham/@item.Url/@item.Id" class="quickview"><i class="fa fa-eye"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    @if (item.PriceDiscount > 0 && item.Price > 0)
+                                                    {
+                                                        <div class="item-lable">
+                                                            <span class="lable-new">-@(Math.Floor(Convert.ToDecimal(item.Price / item.PriceDiscount - 1) * 100))%</span>
+                                                            <span class="lable-sale">sale</span>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <div class="item-content">
+                                                    <div class="product-name">
+                                                        <a href="/san-pham/@item.Url/@item.Id">
+                                                            @item.Name
+                                                        </a>
+                                                    </div>
+                                                    <div class="ratting-box">
+                                                        <div class="rating">
+                                                            <span class="star active"></span>
+                                                            <span class="star active"></span>
+                                                            <span class="star active"></span>
+                                                            <span class="star active"></span>
+                                                            <span class="star-half-o"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        @if (item.PriceDiscount > 0 && item.Price > 0)
+                                                        {
+                                                            <span class="old-price">@Convert.ToDecimal(item.Price).ToString("N0") đ</span>
+                                                            <span class="new-price">@Convert.ToDecimal(item.PriceDiscount).ToString("N0") đ</span>
+                                                        }
+                                                        else if (item.Price > 0)
+                                                        {
+                                                            <span class="new-price">@Convert.ToDecimal(item.Price).ToString("N0") đ</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="new-price">Liên hệ</span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <!-- mega menu / -->
+                    <!-- / sf menu -->
+                </ul>
+            </li>
+
+            <li class="megamenu">
+                <a href="#" style="text-transform:uppercase">
+                    Danh mục<i aria-hidden="true" class="fa fa-angle-down"></i>
+                </a>
+                <ul class="mmenuffect">
+                    <li class="row">
+                        @foreach (var category in Model.Categories.Where(x => x.ParentId == null))
+                        {
+                            var url = "/chuyen-muc/" + @category.Url + "/" + @category.Id;
+                            var childCategories = Model.Categories.Where(x => x.ParentId == category.Id);
+                            var childCate = Model.Categories.Where(x => x.ParentId == category.Id).FirstOrDefault();
+                            if (childCategories.Count() > 0)
+                            {
+                                <div class="col-md-3 col-sm-6">
+                                    <a class="sub-heading" href="@url">
+                                        <span>
+                                            @category.Name
+                                        </span>
+                                    </a>
+                                    @if (childCategories.Count() > 0)
+                                    {
+                                        <ul class="children">
+                                            @foreach (var childCategory in childCategories)
+                                            {
+                                                var childUrl = "/chuyen-muc/" + childCategory.Url + "/" + childCategory.Id;
+                                                <li><a href="@childUrl">@childCategory.Name</a></li>
+                                            }
+                                        </ul>
+                                    }
+                                </div>
+                            }
+                        }
+                    </li>
+                    <!-- / sf menu -->
+                </ul>
+            </li>
+            <li class="megamenu">
+                <a href="/tin-tuc" style="text-transform:uppercase">
+                    Tin tức
+                </a>            
+            </li>
+        </ul>
+            </nav>
+        </div>
+        <!-- end main menu -->
+        <!-- mobile menu -->
+        <div class="mobile-container hidden-md hidden-lg" style="display: none">
+            <div class="mobile-menu-toggle">
+                <ul>
+                    <li class="toggle-icon"><a href="#">Danh mục</a></li>
+                </ul>
+            </div>
+            <div style="display: none;" class="mobile-main-menu">
+                <ul class="accordion">
+                    @foreach (var category in Model.Categories.Where(x => x.ParentId == null))
+                    {
+                        var url = "/chuyen-muc/" + @category.Url + "/" + @category.Id;
+                        var childCategories = Model.Categories.Where(x => x.ParentId == category.Id);
+                        var childCate = Model.Categories.Where(x => x.ParentId == category.Id).FirstOrDefault();
+                        if (childCategories.Count() > 0)
+                        {
+                            <li class="parent">
+                                <a href="@url">@category.Name</a>
+                                @if (childCategories.Count() > 0)
+                                {
+                                    <ul class="children">
+                                        @foreach (var childCategory in childCategories)
+                                        {
+                                            var childUrl = "/chuyen-muc/" + childCategory.Url + "/" + childCategory.Id;
+                                            <li><a href="@childUrl">@childCategory.Name</a></li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                        else
+                        {
+                            <li> <a href="@url"><span>@category.Name</span></a></li>
+                        }
+                    }
+
+                 
+</ul>
+    </div>
+</div>
+<!-- / mobile menu -->

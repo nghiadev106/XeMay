@@ -1,0 +1,66 @@
+﻿@{
+    string currentCart = ViewBag.sessionCart;
+}
+
+@if (currentCart != null && currentCart.Length > 2)
+{
+    <!--main area-->
+                    <main id="main" class="main-site">
+
+                        <div class="container">
+
+                            <div class="wrap-breadcrumb">
+                                <ul>
+                                    <li class="item-link"><a href="#" class="link">Trang chủ</a></li>
+                                    <li class="item-link"><span>Giỏ hàng</span></li>
+                                </ul>
+                            </div>
+                            <div class=" main-content-area">
+
+                                <div class="wrap-iten-in-cart">
+                                    <h3 class="box-title">Sản phẩm</h3>
+                                    <ul class="products-cart ListCart">
+
+                                       
+                                    </ul>
+                                </div>
+
+                                <div class="summary">
+                                    <div class="order-summary">
+                                        <p class="summary-info"><span class="title">Shipping</span><b class="index">Miễn phí</b></p>
+                                        <p class="summary-info total-info "><span class="title">Tổng tiền</span><b class="index lbl_total"></b></p>
+                                    </div>
+                                    <div class="checkout-info">
+                                        <a class="btn btn-checkout" href="/thanh-toan">Đặt hàng</a>
+                                        <a class="link-to-shop" href="/shop">Tiếp tục mua hàng<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+
+                            </div><!--end main content area-->
+                        </div><!--end container-->
+
+                    </main> <!--main area-->
+                                                }
+                                                else
+                                                {
+
+                                                    <main id="main" class="">
+                                                        <div id="content" class="content-area page-wrapper" role="main">
+                                                            <div class="row row-main">
+                                                                <div class="large-12 col">
+                                                                    <div class="col-inner">
+                                                                        <div class="woocommerce">
+                                                                            <div class="text-center pt pb">
+                                                                                <div class="woocommerce-notices-wrapper"></div><p class="cart-empty woocommerce-info">Chưa có sản phẩm nào trong giỏ hàng.</p>		<p class="return-to-shop">
+                                                                                    <a class="button primary wc-backward" href="/">
+                                                                                        Quay trở lại cửa hàng
+                                                                                    </a>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div><!-- .col-inner -->
+                                                                </div><!-- .large-12 -->
+                                                            </div><!-- .row -->
+                                                        </div>
+                                                    </main><!-- #main -->
+                                                }

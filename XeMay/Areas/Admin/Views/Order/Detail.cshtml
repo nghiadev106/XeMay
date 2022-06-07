@@ -1,0 +1,131 @@
+﻿@model XeMay.Areas.Admin.Models.Order.StatusRequest
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var order = (XeMay.Data.Order)ViewBag.order;
+    var orderDetails = (List<XeMay.Models.OrderDetailViewModel>)ViewBag.orderDetails;
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Thông tin đơn hàng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Thông tin đơn hàng</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Index" asp-controller="Order" asp-area="Admin">Quay lại</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">             
+                    <form asp-action="ChangeStatus" asp-controller="Order" asp-area="Admin" method="post">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="exampleInputEmail1">Trạng thái đơn hàng: </label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="hidden" asp-for="Id" value="@order.Id" class="form-control" />
+                                    <select class="form-control" id="Status" asp-for="PaymentStatus">
+                                        @if (order.PaymentStatus == 2)
+                                        {
+                                            <option value="2" selected>Hoàn thành</option>
+                                            <option value="1">Đã xác thực</option>
+                                            <option value="0">Chờ xác thực</option>
+                                        }
+                                        else if (order.PaymentStatus == 1)
+                                        {
+                                            <option value="2">Hoàn thành</option>
+                                            <option value="1" selected>Đã xác thực</option>
+                                            <option value="0">Chờ xác thực</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="2">Hoàn thành</option>
+                                            <option value="1">Đã xác thực</option>
+                                            <option value="0" selected>Chờ xác thực</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                    <h2>Thông tin người mua</h2>
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>SĐT</th>
+                                <th>Địa chỉ</th>
+                                <th>Ghi chú</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>@order.OrderName</td>
+                                        <td>@order.OrderEmail</td>
+                                        <td>@order.OrderPhone</td>
+                                        <td>@order.OrderAddress</td>
+                                        <td>@order.OrderNote</td>
+                                        @if (order.PaymentStatus == 2)
+                                        {
+                                            <td><span class="btn-success">Hoàn thành</span></td>
+                                        }
+                                        else if (order.PaymentStatus == 1)
+                                        {
+                                            <td><span class="btn-warning">Đã xác thực</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="btn-danger">Chờ Xác thực</span></td>
+                                        }
+                                    </tr>
+                        </tbody>
+                    </table>
+                    <h3>Chi tiết đơn hàng</h3>
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Giá khuyễn mãi</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var stt = 0;
+                                @foreach (var item in orderDetails)
+                                {
+                                    var subTotal = item.PriceDiscount * item.Quantity;
+                                    <tr>
+                                        <td>@Html.Raw(stt = stt + 1)</td>
+                                        <td><img src="@item.Logo" style="width:60px;" /></td>
+                                        <td>@item.ProductName</td>
+                                        <td>@Convert.ToDecimal(item.Price).ToString("N0") đ</td>
+                                        <td>@Convert.ToDecimal(item.PriceDiscount).ToString("N0") đ</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@Convert.ToDecimal(subTotal).ToString("N0") đ</td>
+                                    </tr>
+                                 }
+                            }
+                            <tr><td colspan="7">Tổng tiền : @Convert.ToDecimal(order.TotalMoney).ToString("N0") đ</td></tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>

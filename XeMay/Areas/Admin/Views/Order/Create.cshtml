@@ -1,0 +1,141 @@
+﻿@model XeMay.Models.OrderViewModel
+
+@{ ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; }
+
+@section js{
+    <script src="~/admin/js/order.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ddlProducts").select2();
+        });
+        var order = new orderController();
+        order.initialize();
+    </script>
+
+}
+@section css{
+    <style type="text/css">
+        .select2-container .select2-selection--single {
+            box-sizing: border-box;
+            cursor: pointer;
+            display: block;
+            height: 37px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+}
+
+<input type="hidden" id="success" value="@TempData["success"]" />
+<input type="hidden" id="warning" value="@TempData["warning"]" />
+<input type="hidden" id="error" value="@TempData["error"]" />
+<div class="container-fluid">
+    <h1 class="mt-4">Tạo mới hóa đơn</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Tạo mới hóa đơn</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="order" asp-area="admin">Về danh sách</a>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Create" asp-controller="Order" asp-area="Admin" method="post">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Thêm sản phẩm</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Sản phẩm</label>
+                                    <select id="ddlProducts" class="form-control" asp-items="ViewBag.ListProducts"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Số lượng</label>
+                                <input type="number" min="1" value="1" class="form-control" id="quantity" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" style="margin-top: 31px;" class="btn btn-success add-product">Thêm sản phẩm</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Ảnh</th>
+                                        <th class="text-center">Tên sản phẩm</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Giá</th>
+                                        <th class="text-center">Thành tiền</th>
+                                        <th class="text-center">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ListProduct">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:30px;">
+                        <h3>Thông tin khách hàng</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Tên khách hàng</label>
+                            <input asp-for="OrderName" type="text" class="form-control" />
+                            <span asp-validation-for="OrderName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Địa chỉ</label>
+                            <input asp-for="OrderAddress" type="text" class="form-control" />
+                            <span asp-validation-for="OrderAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Số điện thoại</label>
+                            <input asp-for="OrderPhone" type="number" class="form-control" />
+                            <span asp-validation-for="OrderPhone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input asp-for="OrderEmail" type="text" class="form-control" />
+                            <span asp-validation-for="OrderEmail" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Trạng thái đơn hàng</label>
+                            <select asp-for="PaymentStatus" class="form-control">
+                                <option value="0">Chưa xác nhận</option>
+                                <option value="1">Đã xác nhận</option>
+                                <option value="2" selected>Hoàn thành</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Ghi chú</label>
+                            <textarea asp-for="OrderNote" type="text" class="form-control"></textarea>
+                            <span asp-validation-for="OrderNote" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

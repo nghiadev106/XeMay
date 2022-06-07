@@ -1,0 +1,150 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+    var revenuesDate = (List<XeMay.Models.RevenueStatisticViewModel>)ViewBag.revenuesDate;
+    var revenuesMonth = (List<XeMay.Models.RevenueStatisticMonthViewModel>)ViewBag.revenuesMonth;
+    var revenuesYear = (List<XeMay.Models.RevenueStatisticYearViewModel>)ViewBag.revenuesYear;
+
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Thống kê doanh thu</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item">Doanh thu</li>
+    </ol>
+    <div class="card mb-6" style="margin-bottom:30px;">
+        <div class="card-body">
+            <div class="row" style="margin-bottom:20px;">
+                <form asp-action="RevenueStatistic" asp-controller="Order" asp-area="admin" style="display:flex">
+                    <div class="form-group" style="margin-right:30px;">
+                        <label class="control-label"> Từ ngày: </label>
+                        <input name="fromDate" type="datetime-local" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Đến ngày: </label>
+                        <input name="toDate" type="datetime-local" class="form-control" />
+                    </div>
+                    <div class="col-6" style=" margin-top: 28px;">
+                        <button type="submit" class="btn btn-secondary">Thống kê</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h3>Doanh thu theo ngày</h3>
+            </div>
+            <div class="table-responsive">
+                @if (revenuesDate.Count() > 0)
+                {
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Doanh thu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var stt = 0;
+                                @foreach (var item in revenuesDate)
+                                {
+                                    <tr>
+                                        <td>@Html.Raw(stt = stt + 1)</td>
+                                        <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Revenues</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>Không có thống kê nào</span>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-6" style="margin-bottom:30px;">
+        <div class="card-body">
+            <div>
+                <h3>Doanh thu theo tháng</h3>
+            </div>
+            <div class="table-responsive">
+                @if (revenuesMonth.Count() > 0)
+                {
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tháng</th>
+                                <th>Doanh thu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var stt = 0;
+                                @foreach (var item in revenuesMonth)
+                                {
+                                    <tr>
+                                        <td>@Html.Raw(stt = stt + 1)</td>
+                                        <td>@item.Month</td>
+                                        <td>@item.Revenues</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>Không có thống kê nào</span>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-6">
+        <div class="card-body">
+            <div>
+                <h3>Doanh thu theo năm</h3>
+            </div>
+            <div class="table-responsive">
+                @if (revenuesYear.Count() > 0)
+                {
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Năm</th>
+                                <th>Doanh thu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var stt = 0;
+                                @foreach (var item in revenuesYear)
+                                {
+                                    <tr>
+                                        <td>@Html.Raw(stt = stt + 1)</td>
+                                        <td>@item.Year</td>
+                                        <td>@item.Revenues</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>Không có thống kê nào</span>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>

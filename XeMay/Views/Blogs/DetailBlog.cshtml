@@ -1,0 +1,31 @@
+﻿@model XeMay.Data.News
+@{
+    ViewData["Title"] = "Chi tiết tin";
+    var categories = (List<XeMay.Data.CategoriesNew>)ViewBag.categories;
+    var relatedNews = (List<XeMay.Data.News>)ViewBag.relatedNews;
+    var ListNews = (List<XeMay.Data.News>)ViewBag.ListNews;
+}
+
+<!--main area-->
+<main id="main" class="main-site">
+    <div class="container">
+        <div class="wrap-breadcrumb">
+            <ul>
+                <li class="item-link"><a href="/" class="link">Trang chủ</a></li>
+                <li class="item-link"><span>Chi tiết</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- <div class="main-content-area"> -->
+        <div class="aboutus-info">
+            <b class="box-title" style="text-align:center; margin-bottom:15px;font-size:26px;font-weight:bold">@Model.Name</b>
+            <p class="txt-content" style="text-align:justify;">@Model.Description</p>
+            <p  class="txt-content"  style="text-align:justify;">
+                @Html.Raw(Model.Detail)
+            </p>
+        </div>
+    </div><!--end container-->
+</main>
+<!--main area-->

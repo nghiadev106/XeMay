@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Tìm kiếm chi tiết";
+
+    var ListProducts = (List<XeMay.Data.Product>)ViewBag.ListProducts;
+    var listCategories = (List<XeMay.Data.Category>)ViewBag.ListCategories;
+}
+
+<div id="content">
+    <div class="wrapper">
+        <div class="lf">
+            <div id="ctl00_cphContent_ucSearchAdvance_pnlSearch" class="s_adv" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_cphContent_ucSearchAdvance_btnSearch&#39;)">
+                <h2>
+                    You want to choose the flowers
+                </h2>
+                <form asp-action="SearchAdvand" asp-controller="Products">
+                    <div class="col_1_2 m_r12">
+                        <div>
+                            <label>
+                                Mức giá:
+                            </label>
+                            <select name="price">
+                                <option value="0">Tất cả</option>
+                                <option value="0-250000">Dưới 250.000đ</option>
+                                <option value="250000-350000">Giá từ 250.000đ - 350.000đ</option>
+                                <option value="350000-400000">Giá từ 350.000đ - 400.000đ</option>
+                                <option value="400000-500000">Giá từ 400.000đ - 500.000đ</option>
+                                <option value="500000-600000">Giá từ 500.000đ - 600.000đ</option>
+                                <option value="600000-800000">Giá từ 600.000đ - 800.000đ</option>
+                                <option value="800000-1000000">Giá từ 800.000đ - 1.000.000đ</option>
+                                <option value="1000000-0">Giá trên 1.000.000đ</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>
+                                Thể loại:
+                            </label>
+                            <select name="CategoryId">
+                                <option value="0">Tất cả</option>
+                                @foreach (var item in listCategories)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col_1_2">
+                        <div>
+                            <label>
+                                Sort order:
+                            </label>
+                            <select name="sort">
+                                <option value="0">Mặc định</option>
+                                <option value="1">Giá từ thấp tới cao</option>
+                                <option value="2">Giá từ cao tới thấp</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="re_btt">
+                        <input type="submit" value="Tìm kiếm">
+                    </div>
+                </form>
+              
+            </div>
+            <h1 class="title">
+                Kết quả: @ListProducts.Count()
+            </h1>
+            <div id="data_items" class="data_items">
+                <div class="items">
+                    @if (ListProducts.Count > 0)
+                    {
+                        foreach (var item in ListProducts)
+                        {
+                            <div class="item">
+                                <div class="i">
+                                    <a id="ctl00_cphContent_ucPromotions_rptItems_ctl01_hplImage" title="@item.Name" href="/san-pham/@item.Url/@item.Id"><img id="ctl00_cphContent_ucPromotions_rptItems_ctl01_imgItem" class="lazy" data-original="@item.Logo" alt="@item.Name" title="@item.Name" width="150" height="180" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX6+vqsEtnpAAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg==" style="border-width:0px;" /></a>
+                                </div>
+                                <div class="t">
+                                    <span>
+                                        <a id="ctl00_cphContent_ucPromotions_rptItems_ctl01_hplTitle" title="Khuyến mãi - Bó hoa đẹp - Shop hoa đẹp tại hưng yên" href="/san-pham/@item.Url/@item.Id">@item.Name</a>
+                                    </span>
+                                    @if (item.PriceDiscount > 0)
+                                    {
+                                        <span id="ctl00_cphContent_ucPromotions_rptItems_ctl01_lblVNPrice" class="vn"><em class='oprice'>@Convert.ToDecimal(item.Price).ToString("N0") đ</em><em>@Convert.ToDecimal(item.PriceDiscount).ToString("N0") đ</em></span>
+                                    }
+                                    else
+                                    {
+                                        <span id="ctl00_cphContent_ucPromotions_rptItems_ctl01_lblVNPrice" class="vn"><em>@Convert.ToDecimal(item.Price).ToString("N0") đ</em></span>
+
+                                    }
+                                </div>
+                                @if (item.PriceDiscount != null)
+                                {
+                                    <span class="ibadge isale">Sale</span>
+                                }
+                                @if (item.IsNew == true)
+                                {
+                                    <span class="ibadge inew"></span>
+                                }
+                            </div>
+                        }
+                    } 
+                    else
+                    {
+                    <span>Không tìm thấy sản phẩm nào</span>
+                    }
+                </div>
+            </div>
+          
+        </div>
+        <div class="rt">
+            @await Html.PartialAsync("_BannerTab")
+        </div>
+    </div>
+</div>
+<div class="line-b padding_top_20">
+</div>

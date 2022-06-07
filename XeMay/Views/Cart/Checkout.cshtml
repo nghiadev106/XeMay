@@ -1,0 +1,54 @@
+﻿@model XeMay.Models.OrderViewModel
+
+<!--main area-->
+<main id="main" class="main-site">
+
+    <div class="container">
+
+        <div class="wrap-breadcrumb">
+            <ul>
+                <li class="item-link"><a href="#" class="link">home</a></li>
+                <li class="item-link"><span>login</span></li>
+            </ul>
+        </div>
+        <div class=" main-content-area">
+            <div class="wrap-address-billing">
+                <h3 class="box-title">Billing Address</h3>
+                <form action="/Cart/Checkout" method="post" name="frm-billing">
+
+                    <p class="row-in-form">
+                        <label for="fname">Họ và tên<span>*</span></label>
+                        <input id="fname" type="text" asp-for="OrderName" value="" placeholder="Họ và tên" style="margin-right:20px;">
+                    </p>
+                    <p class="row-in-form">
+                        <label for="lname">Số điện thoại<span>*</span></label>
+                        <input id="lname" type="number" asp-for="OrderPhone" value="" placeholder="Số điện thoại">
+                    </p>
+                    <p class="row-in-form">
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" asp-for="OrderEmail" value="" placeholder="email" style="margin-right:20px;">
+                    </p>
+                    <p class="row-in-form">
+                        <label for="phone">Địa chỉ<span>*</span></label>
+                        <input id="phone" type="text" asp-for="OrderAddress" value="" placeholder="Địa chỉ">
+                    </p>
+                    <p class="row-in-form">
+                        <label for="phone">Ghi chú<span>*</span></label>
+                        <input id="phone" type="text" asp-for="OrderNote" value="" placeholder="Ghi chú">
+                    </p>
+                    <div class="summary summary-checkout">
+                        <div class="summary-item payment-method">
+                            <h4 class="title-box">Thanh toán ngay</h4>
+
+                            <p class="summary-info grand-total"><span>Tổng thanh toán</span> <span class="grand-total-price lbl_total"></span></p>
+                            <input type="submit" value="Đặt hàng" class="btn btn-medium">
+                        </div>
+                    </div>
+                </form>
+
+            </div>          
+        </div><!--end main content area-->
+    </div><!--end container-->
+
+</main>
+<!--main area-->

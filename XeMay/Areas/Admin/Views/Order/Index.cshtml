@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+    var ListOrder = (List<XeMay.Data.Order>)ViewBag.ListOrder;
+}
+
+<input type="hidden" id="success" value="@TempData["success"]" />
+<input type="hidden" id="warning" value="@TempData["warning"]" />
+<input type="hidden" id="error" value="@TempData["error"]" />
+
+<div class="container-fluid">
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách hóa đơn</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Create" asp-controller="Order" asp-area="admin">Tạo mới</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @if (ListOrder.Count() > 0)
+                {
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>SĐT</th>
+                                <th>Địa chỉ</th>
+                                <th>Ghi chú</th>
+                                <th>Trạng thái</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var stt = 0;
+                                @foreach (var item in ListOrder)
+                                {
+                                    <tr>
+                                        <td>@Html.Raw(stt = stt + 1)</td>
+                                        <td>@item.OrderName</td>
+                                        <td>@item.OrderEmail</td>
+                                        <td>@item.OrderPhone</td>
+                                        <td>@item.OrderAddress</td>
+                                        <td>@item.OrderNote</td>
+                                        @if (item.PaymentStatus == 2)
+                                        {
+                                            <td><span class="btn-success">Hoàn thành</span></td>
+                                        }
+                                        else if (item.PaymentStatus == 1)
+                                        {
+                                            <td><span class="btn-warning">Đã xác thực</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="btn-danger">Chờ Xác thực</span></td>
+                                        }
+                                        <td>
+                                            <a href="/Admin/Order/Detail/@item.Id" class="btn btn-primary glyphicon glyphicon-pencilt">Chi tiết</a>
+                                            <a class="btn btn-danger glyphicon glyphicon-trash" onclick="return confirm('Bạn có muốn hóa đơn xóa không?');" href="@Url.Action("Delete","Order")/@item.Id">Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>Không có hóa đơn nào</span>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
