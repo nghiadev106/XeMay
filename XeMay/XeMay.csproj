@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\js\jquery.accordion.source.js" />
     <None Include="wwwroot\js\jquery.ddslick.min.js" />
     <None Include="wwwroot\js\theme.js" />
