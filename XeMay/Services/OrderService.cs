@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using XeMay.Areas.Admin.Models.Order;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 
 namespace XeMay.Services

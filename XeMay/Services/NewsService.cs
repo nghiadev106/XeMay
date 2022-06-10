@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using XeMay.Areas.Admin.Models.News;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 
 namespace XeMay.Services

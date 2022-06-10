@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using XeMay.Models;
 
-namespace XeMay.Data.Migrations
+namespace XeMay.Model.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

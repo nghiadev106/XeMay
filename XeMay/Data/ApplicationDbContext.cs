@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace XeMay.Data
+namespace XeMay.Model
 {
     public class ApplicationDbContext : IdentityDbContext
     {

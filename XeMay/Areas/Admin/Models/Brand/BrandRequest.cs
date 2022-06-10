@@ -1,0 +1,22 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace XeMay.Areas.Admin.Models.Brand
+{
+    public class BrandRequest
+    {
+        public long Id { get; set; }
+
+        [Required(ErrorMessage = "Bạn phải nhập tên danh mục")]
+        [StringLength(500, ErrorMessage = "tên danh mục không quá 500 ký tự")]
+        public string Name { get; set; }
+
+        [StringLength(500, ErrorMessage = "mô tả danh mục không quá 500 ký tự")]
+        public string Description { get; set; }
+
+        [Required(ErrorMessage = "Bạn phải nhập URL")]
+        [StringLength(500, ErrorMessage = "URL không quá 500 ký tự")]
+        public string Url { get; set; }
+
+        public int? Status { get; set; }
+    }
+}

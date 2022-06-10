@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 
 namespace XeMay.Controllers

@@ -15,5 +15,9 @@
     <NameOfLastUsedPublishProfile>D:\Outsource\flower\WebsiteBanHang\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
     <ShowAllFiles>false</ShowAllFiles>
     <WebStackScaffolding_LayoutPageFile>~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml</WebStackScaffolding_LayoutPageFile>
+    <ActiveDebugProfile>XeMay</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

@@ -63,6 +63,21 @@
                             <span asp-validation-for="Url" class="text-danger"></span>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Động cơ(cc)</label>
+                            <input asp-for="Engine" type="number" class="form-control" />
+                            <span asp-validation-for="Engine" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Năm sản xuất</label>
+                            <input asp-for="Year" type="number" class="form-control" />
+                            <span asp-validation-for="Year" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Thương hiệu</label><br />
+                            <select asp-for="BrandId" class="form-control" asp-items="ViewBag.brandList"></select>
+                            <span asp-validation-for="BrandId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label">Danh mục</label><br />
                             <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.categoryList"></select>
                             <span asp-validation-for="CategoryId" class="text-danger"></span>

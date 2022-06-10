@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using XeMay.Areas.Admin.Models.Category;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 
 namespace XeMay.Services

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Services;
 
 namespace XeMay
@@ -50,8 +50,7 @@ namespace XeMay
             services.AddTransient<ICategoryNewsService, CategoryNewsService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<ISlideService, SlideService>();
-            services.AddTransient<IPromotionService, PromotionService>();
-            services.AddTransient<ITopMenuService, TopMenuService>();
+            services.AddTransient<IBrandService, BrandService>();
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
@@ -144,9 +143,15 @@ namespace XeMay
 
                 endpoints.MapControllerRoute(
                  name: "ProductCategories",
-                 pattern: "thuong-hieu/{url}/{id}",
+                 pattern: "loai-xe/{url}/{id}",
                  defaults: new { controller = "Products", action = "ProductCategories" }
                  );
+
+                endpoints.MapControllerRoute(
+                name: "ProductBrand",
+                pattern: "thuong-hieu/{url}/{id}",
+                defaults: new { controller = "Products", action = "ProductBrand" }
+                );
 
                 endpoints.MapControllerRoute(
                 name: "Blog",

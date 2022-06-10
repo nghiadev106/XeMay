@@ -9,7 +9,6 @@ using XeMay.Services;
 
 namespace XeMay.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class NewsController : BaseController
     {
         private readonly INewsService _newsService;

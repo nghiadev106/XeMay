@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using XeMay.Data;
+using XeMay.Model;
 
 namespace XeMay.Areas.Admin.Models.Product
 {
@@ -16,6 +16,10 @@ namespace XeMay.Areas.Admin.Models.Product
 
         [Required(ErrorMessage = "Bạn phải chọn danh mục")]
         public long? CategoryId { get; set; }
+
+
+        [Required(ErrorMessage = "Bạn phải chọn thương hiệu")]
+        public long? BrandId { get; set; }
         public string Logo { get; set; }
 
         [StringLength(500, ErrorMessage = "Mô tả sản phẩm không quá 500 ký tự")]
@@ -29,6 +33,8 @@ namespace XeMay.Areas.Admin.Models.Product
         public bool? IsNew { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? EditDate { get; set; }
+        public int? Engine { get; set; }
+        public int? Year { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập URL")]
         public string Url { get; set; }

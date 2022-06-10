@@ -13,6 +13,9 @@ namespace XeMay.Areas.Admin.Models.Product
 
         [Required(ErrorMessage = "Bạn phải chọn danh mục")]
         public long? CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Bạn phải chọn thương hiệu")]
+        public long? BrandId { get; set; }
         public string Logo { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập mô tả sản phẩm")]
@@ -30,6 +33,8 @@ namespace XeMay.Areas.Admin.Models.Product
 
         [Required(ErrorMessage = "Bạn phải nhập URL")]
         public string Url { get; set; }
+        public int? Engine { get; set; }
+        public int? Year { get; set; }
         public int? DisplayOrder { get; set; }
 
         [Required(ErrorMessage = "Bạn phải chọn trạng thái")]

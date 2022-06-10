@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace XeMay.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BaseController : Controller
     {
         public override void OnActionExecuting(ActionExecutingContext context)

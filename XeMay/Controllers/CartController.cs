@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 using XeMay.Services;
 

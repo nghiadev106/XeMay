@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using XeMay.Models;
 
-namespace XeMay.Data.Migrations
+namespace XeMay.Model.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]

@@ -5,7 +5,6 @@ using XeMay.Services;
 
 namespace XeMay.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class CategoryNewsController : BaseController
     {
         private readonly ICategoryNewsService _categoryService;

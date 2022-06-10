@@ -11,17 +11,18 @@ using XeMay.Services;
 
 namespace XeMay.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class ProductController : BaseController
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
         private IHostingEnvironment _env;
 
-        public ProductController(IProductService productService, ICategoryService categoryService, IHostingEnvironment env)
+        public ProductController(IProductService productService, ICategoryService categoryService, IBrandService brandService, IHostingEnvironment env)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _brandService = brandService;
             _env=env;
         }
         public async Task<IActionResult> Index()
@@ -38,6 +39,12 @@ namespace XeMay.Areas.Admin.Controllers
             categories.Insert(0, new CategoryViewModel { Id=-1 , Name="-- Chọn danh mục --"});
             SelectList categoryList = new SelectList(categories, "Id", "Name");
             ViewBag.categoryList = categoryList;
+
+
+            List<BrandViewModel> brands = await _brandService.GetAll();
+            brands.Insert(0, new BrandViewModel { Id = -1, Name = "-- Chọn hương hiệu --" });
+            SelectList brandList = new SelectList(brands, "Id", "Name");
+            ViewBag.brandList = brandList;
             return categoryList;
         }
 
@@ -63,7 +70,14 @@ namespace XeMay.Areas.Admin.Controllers
             if (request.CategoryId == -1)
             {
                 ModelState.AddModelError("", "Bạn chưa chọn danh mục");
-                TempData["warning"] = "Bạn chưa chọn danh mục";
+                TempData["error"] = "Bạn chưa chọn danh mục";
+                return View(request);
+            }
+
+            if (request.BrandId == -1)
+            {
+                ModelState.AddModelError("", "Bạn chưa chọn thương hiệu");
+                TempData["error"] = "Bạn chưa chọn thương hiệu";
                 return View(request);
             }
 
@@ -108,7 +122,14 @@ namespace XeMay.Areas.Admin.Controllers
             if (request.CategoryId == -1)
             {
                 ModelState.AddModelError("", "Bạn chưa chọn danh mục");
-                TempData["warning"] = "Bạn chưa chọn danh mục";
+                TempData["error"] = "Bạn chưa chọn danh mục";
+                return View(request);
+            }
+
+            if (request.BrandId == -1)
+            {
+                ModelState.AddModelError("", "Bạn chưa chọn thương hiệu");
+                TempData["error"] = "Bạn chưa chọn thương hiệu";
                 return View(request);
             }
 

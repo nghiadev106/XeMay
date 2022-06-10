@@ -7,13 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using XeMay.Areas.Admin.Models.Order;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 using XeMay.Services;
 
 namespace XeMay.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class OrderController : BaseController
     {
         private readonly IProductService _productService;

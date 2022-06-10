@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace XeMay.Data.Migrations
+namespace XeMay.Model.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

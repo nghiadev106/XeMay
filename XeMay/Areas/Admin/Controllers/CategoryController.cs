@@ -8,7 +8,6 @@ using XeMay.Services;
 
 namespace XeMay.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;

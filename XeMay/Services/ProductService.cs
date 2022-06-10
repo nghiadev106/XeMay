@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using XeMay.Areas.Admin.Models.Product;
-using XeMay.Data;
+using XeMay.Model;
 using XeMay.Models;
 
 namespace XeMay.Services
@@ -15,7 +15,6 @@ namespace XeMay.Services
     public interface IProductService
     {
         Task<List<ProductViewModel>> GetDiscountProduct();
-        Task<PaginationViewModel> Pagination(Dictionary<string, object> data);
 
         Task<List<ProductViewModel>> GetAll();
 
@@ -49,6 +48,7 @@ namespace XeMay.Services
                 Name = p.Name,
                 Logo = p.Logo,
                 CategotyName = p.Category.Name,
+                BrandName = p.Brand.Name,
                 Description = p.Description,
                 Price = p.Price,
                 Detail = p.Detail,
@@ -57,6 +57,8 @@ namespace XeMay.Services
                 Url = p.Url,
                 DisplayOrder = p.DisplayOrder,
                 Status = p.Status,
+                Year=p.Year,
+                Engine=p.Engine,
                 CreateDate = p.CreateDate
             }).OrderByDescending(x=> x.CreateDate).ToListAsync();
         }
@@ -70,95 +72,23 @@ namespace XeMay.Services
                 Name = p.Name,
                 Logo = p.Logo,
                 CategotyName = p.Category.Name,
+                BrandName = p.Brand.Name,
                 Description = p.Description,
                 Price = p.Price,
                 Detail = p.Detail,
                 PriceDiscount = p.PriceDiscount,
                 IsNew = p.IsNew,
                 Url = p.Url,
+                Year = p.Year,
+                Engine = p.Engine,
+                BrandId=p.BrandId,
                 DisplayOrder = p.DisplayOrder,
                 Status = p.Status,
                 CreateDate = p.CreateDate
             }).ToListAsync();
         }
 
-        public async Task<PaginationViewModel> Pagination(Dictionary<string, object> data)
-        {
-            PaginationViewModel paginationViewModel = new PaginationViewModel();
-            try
-            {
-                int page = int.Parse(data["page"].ToString());
-                int pageSize = int.Parse(data["pageSize"].ToString());
-                string nameSearch = "";
-                if (data.ContainsKey("nameSearch") && !string.IsNullOrEmpty(data["nameSearch"].ToString().Trim()))
-                    nameSearch = data["nameSearch"].ToString().Trim().ToLower();
-                paginationViewModel.Page = page;
-                paginationViewModel.PageSize = pageSize;
-                paginationViewModel.TotalItems = await _context.Products.Where(x => x.Name.ToLower().IndexOf(nameSearch) >= 0).CountAsync();
-                var model = from pro in _context.Products
-                            select new ProductViewModel
-                            {
-                                Id = pro.Id,
-                                Name = pro.Name,
-                                Logo = pro.Logo,
-                                CategotyName = pro.Category.Name,
-                                Description = pro.Description,
-                                Price = pro.Price,
-                                Detail = pro.Detail,
-                                PriceDiscount = pro.PriceDiscount,
-                                IsNew = pro.IsNew,
-                                Url = pro.Url,
-                                DisplayOrder = pro.DisplayOrder,
-                                Status = pro.Status,
-                                CreateDate = pro.CreateDate
-                            };
-                string sortByName = "";
-                if (data.ContainsKey("sortByName") && !string.IsNullOrEmpty(data["sortByName"].ToString().Trim()))
-                    sortByName = data["sortByName"].ToString().Trim().ToLower();
-                switch (sortByName)
-                {
-                    case "asc":
-                        model = model.OrderBy(x => x.Name);
-                        break;
-
-                    case "desc":
-                        model = model.OrderByDescending(x => x.Name);
-                        break;
-                }
-                string sortByCreatedDate = "";
-                if (data.ContainsKey("sortByCreatedDate") && !string.IsNullOrEmpty(data["sortByCreatedDate"].ToString().Trim()))
-                    sortByCreatedDate = data["sortByCreatedDate"].ToString().Trim().ToLower();
-                switch (sortByCreatedDate)
-                {
-                    case "asc":
-                        model = model.OrderBy(x => x.CreateDate);
-                        break;
-
-                    case "desc":
-                        model = model.OrderByDescending(x => x.CreateDate);
-                        break;
-                }
-                string sortByPrice = "";
-                if (data.ContainsKey("sortByPrice") && !string.IsNullOrEmpty(data["sortByPrice"].ToString().Trim()))
-                    sortByPrice = data["sortByPrice"].ToString().Trim().ToLower();
-                switch (sortByPrice)
-                {
-                    case "asc":
-                        model = model.OrderBy(x => x.Price);
-                        break;
-                    case "desc":
-                        model = model.OrderByDescending(x => x.Price);
-                        break;
-                }
-                paginationViewModel.Data = model.Where(x => x.Name.ToLower().IndexOf(nameSearch) >= 0).Skip((page - 1) * pageSize).Take(pageSize);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return paginationViewModel;
-        }
-       
+      
          public async Task<int> Create(ProductCreateRequest request)
         {
             using (var transaction = _context.Database.BeginTransaction())
@@ -176,6 +106,9 @@ namespace XeMay.Services
                         PriceDiscount = request.PriceDiscount,
                         IsNew = request.IsNew,
                         Url = request.Url,
+                        BrandId=request.BrandId,
+                        Year = request.Year,
+                        Engine = request.Engine,
                         DisplayOrder = request.DisplayOrder,
                         Status = request.Status,
                         CreateDate = DateTime.Now
@@ -228,6 +161,9 @@ namespace XeMay.Services
                     product.PriceDiscount = request.PriceDiscount;
                     product.IsNew = request.IsNew;
                     product.Url = request.Url;
+                    product.Year = request.Year;
+                    product.BrandId = request.BrandId;
+                    product.Engine = request.Engine;
                     product.DisplayOrder = request.DisplayOrder;
                     product.Status = request.Status;
                     product.EditDate = DateTime.Now;
@@ -315,6 +251,7 @@ namespace XeMay.Services
                     Name = p.Name,
                     Logo = p.Logo,
                     CategotyName = p.Category.Name,
+                    BrandName=p.Brand.Name,
                     Description = p.Description,
                     Price = p.Price,
                     PriceDiscount=p.PriceDiscount,
@@ -322,9 +259,12 @@ namespace XeMay.Services
                     Url=p.Url,
                     IsNew = p.IsNew,
                     CategoryId=p.CategoryId,
+                    BrandId=p.BrandId,
                     DisplayOrder=p.DisplayOrder,
                     Status=p.Status,
-                    CreateDate=p.CreateDate,
+                    Year = p.Year,
+                    Engine = p.Engine,
+                    CreateDate =p.CreateDate,
                     Images= _context.ProductImages.Where(x => x.ProductId == id).ToList()
                 }).FirstOrDefaultAsync();
             }
@@ -346,12 +286,15 @@ namespace XeMay.Services
                     Name = product.Name,
                     Logo = product.Logo,
                     CategoryId = product.CategoryId,
+                    BrandId=product.BrandId,
                     Description = product.Description,
                     Price = product.Price,
                     Detail = product.Detail,
                     PriceDiscount = product.PriceDiscount,
                     IsNew = product.IsNew,
                     Url = product.Url,
+                    Year = product.Year,
+                    Engine = product.Engine,
                     DisplayOrder = product.DisplayOrder,
                     Status = product.Status,
                     Images = _context.ProductImages.Where(x => x.ProductId == id).ToList()

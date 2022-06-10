@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    var order = (XeMay.Data.Order)ViewBag.order;
+    var order = (XeMay.Model.Order)ViewBag.order;
     var orderDetails = (List<XeMay.Models.OrderDetailViewModel>)ViewBag.orderDetails;
 }
 
