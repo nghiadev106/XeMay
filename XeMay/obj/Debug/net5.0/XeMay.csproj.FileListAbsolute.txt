@@ -450,11 +450,9 @@ D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Cart\Index.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Home\Contact.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\DetailProduct.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\ListProduct.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\ProductCategories.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\Search.cshtml.g.cs
-D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\SearchAdvand.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Shared\Components\Menu\Index.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -475,3 +473,4 @@ D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Areas\Admin\Views\Brand\Edit.cshtml.g.c
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Areas\Admin\Views\Brand\Index.cshtml.g.cs
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\XeMay.csproj.AssemblyReference.cache
 D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\Productbrand.cshtml.g.cs
+D:\DA\XeMay\XeMay\obj\Debug\net5.0\Razor\Views\Products\Detail.cshtml.g.cs

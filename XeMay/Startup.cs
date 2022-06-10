@@ -183,7 +183,7 @@ namespace XeMay
                  pattern: "san-pham/{url}/{id}", new
                  {
                      controller = "Products",
-                     action = "DetailProduct"
+                     action = "Detail"
                  });
 
                 endpoints.MapControllerRoute(

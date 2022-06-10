@@ -26,30 +26,26 @@
                         amount = item.price * item.quantity;
                     } 
                     html += `
-<li class="pr-cart-item">
-                                            <div class="product-image">
-                                                <figure><img src="` + item.logo + `" alt=""></figure>
-                                            </div>
-                                            <div class="product-name">
-                                                <a class="link-to-product" href="/san-pham/`+ item.url + `/` + item.productId + `">` + item.name + `</a>
-                                            </div>
-                                            <div class="price-field produtc-price"><p class="price">` + numberWithCommas(item.price) + `&nbsp</p></div>
-                                            <div class="quantity">
-                                                <div class="quantity-input">
-                                                    <input type="text" name="product-quatity"   id="quantity_` + item.productId + `"   value="`+ item.quantity + `" data-max="120" pattern="[0-9]*">
-                                                    <a class="btn btn-increase qty-increase-cart" data-id="` + item.productId + `"></a>
-                                                    <a class="btn btn-reduce qty-decrease-cart" data-id="` + item.productId + `"></a>
-                                                </div>
-                                            </div>
-                                            <div class="price-field sub-total"><p class="price">` + numberWithCommas(amount) + `&nbsp;</p></div>
-                                            <div class="delete">
-                                                <a class="remove removeItem" data-id="` + item.productId + `" class="btn btn-delete" title="">
-                                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
 
- 
+<tr>
+                                    <td class="cart-pic first-row"><img src="` + item.logo + `" alt=""></td>
+                                    <td class="cart-title first-row">
+                                        <h5>` + item.name + `</h5>
+                                    </td>
+                                    <td class="p-price first-row">` + numberWithCommas(item.price) + `&nbsp</td>
+                                    <td class="qua-col first-row">
+                                        <div class="quantity">
+                                            <div class="">
+                                                <input style="width:50px;text-align:center;" type="text" id="quantity_` + item.productId + `"   value="` + item.quantity + `"/>
+                                                    <a class="btn btn-reduce qty-decrease-cart" data-id="` + item.productId + `">-</a>
+                                                    <a class="btn btn-increase qty-increase-cart" data-id="` + item.productId + `">+</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="total-price first-row">` + numberWithCommas(amount) + `&nbsp;</td>
+                                    <td class="close-td first-row"><i class="ti-close removeItem"  data-id="` + item.productId + `"></i></td>
+                                </tr>
+
 `;
                     total += amount;
                 });
@@ -128,54 +124,20 @@
             });
         });
 
-
-        $('body').on('click', '.order-now', function (e) {
-            e.preventDefault();
-            var model = {
-                ProductId: $("#producId").val(),
-                Quantity: parseInt($("#input-quantity2").val()),
-                OrderName: $("#customer-name").val(),
-                OrderAddress: $("#customer-address").val(),
-                OrderEmail: $("#customer-email").val(),
-                OrderPhone: $("#customer-phone").val(),
-                OrderNote: $("#customer-note").val()
-            }
-            $.ajax({
-                type: "POST",
-                url: '/Cart/OrderNow',
-                data: {
-                    order:model
-                },
-                success: function () {
-                    toastr.success('Đặt hàng thành công', 'Thành công')
-                    loadData();
-                },
-                error: function () {
-                    toastr.error('Đặt hàng không thành công', 'Thất bại')
-                }
-            });
-        });
-
         $('body').on('click', '.qty-increase-product', function () {
             var qty_el = $("#input-quantity").val();
-            var price = Number($("#price").val());
             var qty = parseInt(qty_el);
-            if (!isNaN(qty) && !isNaN(price)) {
+            if (!isNaN(qty)) {
                 qty++;
-                var subTotal = price * qty;
-                $(".sub-total").text(numberWithCommas(subTotal));  
                 $("#input-quantity").val(qty);
             }
         });
 
         $('body').on('click', '.qty-decrease-product', function () {
             var qty_el = $("#input-quantity").val();
-            var price = Number($("#price").val());
             var qty = parseInt(qty_el);
-            if (!isNaN(qty) && !isNaN(price) && qty > 1) {
+            if (!isNaN(qty) && qty > 1) {
                 qty--;
-                var subTotal = price * qty;
-                $(".sub-total").text(numberWithCommas(subTotal));
                 $("#input-quantity").val(qty);
             }
         });

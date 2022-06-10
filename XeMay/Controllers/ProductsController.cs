@@ -20,7 +20,7 @@ namespace XeMay.Controllers
             _productService = productService;
         }
 
-        public async Task<IActionResult> ListProduct(int page = 1, int pageSize = 1)
+        public async Task<IActionResult> ListProduct(int page = 1, int pageSize = 15)
         {
             int totalRow = 0;
             var ListProduct= await _context.Products.Where(x => x.Status == 1).OrderByDescending(x=>x.CreateDate).ToListAsync();
@@ -96,7 +96,7 @@ namespace XeMay.Controllers
             return View(paginationSet);
         }
 
-        public async Task<IActionResult> DetailProduct(long id)
+        public async Task<IActionResult> Detail(long id)
         {
             var detail = await _productService.Detail(id);
             var category = await _context.Categories.Where(x => x.Id == detail.CategoryId).SingleOrDefaultAsync();
